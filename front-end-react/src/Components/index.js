@@ -18,7 +18,8 @@ class Home extends React.Component
 
         this.establishConnection();     
         this.sendMessage();
-        this.receiveMessage();  
+        this.receiveMessage();
+        this.disconnect(); 
     
     }
     // To make connection with server
@@ -28,7 +29,7 @@ class Home extends React.Component
     //Send message to server
     sendMessage()
     {
-        const message = {message:"Hai from server"}
+        const message = {message:"Hai from client"}
         this.socket.emit('message',message );
     }
     // Receive message from server
@@ -39,7 +40,13 @@ class Home extends React.Component
         })
 
     }
-
+    // Disconnect from server
+    disconnect()
+    {
+        this.socket.on('disconnected', () => {
+            this.setState({ message: 'Disconnected' })
+        }); 
+    }
     render()
     {
     return(<div>Message From server:{this.state.message}</div>)

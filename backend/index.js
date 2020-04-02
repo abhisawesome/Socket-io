@@ -20,6 +20,9 @@ io.on("connection",(client)=>{
             client.emit('message',"How are you?")
         },4000)
     })
+    client.on('disconnect',()=>{
+        console.log('client disconeected');
+    })
 })
 server.listen(port, () =>
     console.log(`Example app listening on port ${port}!`)
